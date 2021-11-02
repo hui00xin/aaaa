@@ -1,0 +1,193 @@
+
+
+-- BEGIN generate DDL --
+
+DROP DATABASE IF EXISTS crypto_shared;
+
+CREATE DATABASE crypto_shared;
+
+CREATE USER IF NOT EXISTS crypto_rw@'%' IDENTIFIED BY 'crypto_rw_password';
+
+CREATE USER IF NOT EXISTS crypto_ro@'%' IDENTIFIED BY 'crypto_ro_password';
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON crypto_shared.* TO crypto_rw@'%' WITH GRANT OPTION;
+
+GRANT SELECT ON crypto_shared.* TO crypto_ro@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+
+USE crypto_shared;
+
+CREATE TABLE composite_index_providers (
+  providerIndexId BIGINT NOT NULL,
+  compositeIndexId BIGINT NOT NULL,
+  endTime BIGINT NOT NULL,
+  startTime BIGINT NOT NULL,
+  weight BIGINT NOT NULL,
+  maxOffset DECIMAL(36,18) NOT NULL,
+  PRIMARY KEY(compositeIndexId, providerIndexId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE contracts_index_references (
+  type VARCHAR(50) NOT NULL,
+  symbolId BIGINT NOT NULL,
+  indexId BIGINT NOT NULL,
+  PRIMARY KEY(symbolId, type)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE contracts_risk_limits (
+  id BIGINT NOT NULL,
+  maxLeverage INTEGER NOT NULL,
+  maxRiskLimitSteps INTEGER NOT NULL,
+  createdAt BIGINT NOT NULL,
+  riskLimitBase BIGINT NOT NULL,
+  riskLimitStep BIGINT NOT NULL,
+  initialMarginRate DECIMAL(36,18) NOT NULL,
+  maintenanceMarginRate DECIMAL(36,18) NOT NULL,
+  marginRateStep DECIMAL(36,18) NOT NULL,
+  description VARCHAR(100) NOT NULL,
+  PRIMARY KEY(id)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE contracts_symbols (
+  id BIGINT NOT NULL,
+  displayOrder INTEGER NOT NULL,
+  baseCurrencyId BIGINT NOT NULL,
+  endTime BIGINT NOT NULL,
+  marginCurrencyId BIGINT NOT NULL,
+  maximumQuantityPerOrder BIGINT NOT NULL,
+  riskLimitId BIGINT NOT NULL,
+  startTime BIGINT NOT NULL,
+  multiplier DECIMAL(36,18) NOT NULL,
+  quoteMinimumIncrement DECIMAL(36,18) NOT NULL,
+  settlementFeeRate DECIMAL(36,18) NOT NULL,
+  name VARCHAR(32) NOT NULL,
+  type VARCHAR(50) NOT NULL,
+  CONSTRAINT UNI_NAME UNIQUE (name),
+  PRIMARY KEY(id)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE currencies (
+  id BIGINT NOT NULL,
+  name VARCHAR(32) NOT NULL,
+  CONSTRAINT UNI_NAME UNIQUE (name),
+  PRIMARY KEY(id)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE currency_deposit_configs (
+  address VARCHAR(100) NOT NULL,
+  chainId BIGINT NOT NULL,
+  decimals INTEGER NOT NULL,
+  currencyId BIGINT NOT NULL,
+  name VARCHAR(32) NOT NULL,
+  symbol VARCHAR(32) NOT NULL,
+  PRIMARY KEY(address, chainId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE global_settings (
+  id VARCHAR(100) NOT NULL,
+  updatedAt BIGINT NOT NULL,
+  setting VARCHAR(100) NOT NULL,
+  PRIMARY KEY(id)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE index_history_values (
+  id BIGINT AUTO_INCREMENT NOT NULL,
+  indexId BIGINT NOT NULL,
+  timestamp BIGINT NOT NULL,
+  indexValue DECIMAL(36,18) NOT NULL,
+  CONSTRAINT UNI_IDX_TIMESTAMP UNIQUE (indexId, timestamp),
+  PRIMARY KEY(id)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE indexes (
+  id BIGINT NOT NULL,
+  internal BOOL NOT NULL,
+  displayOrder INTEGER NOT NULL,
+  scale INTEGER NOT NULL,
+  endTime BIGINT NOT NULL,
+  startTime BIGINT NOT NULL,
+  name VARCHAR(32) NOT NULL,
+  provider VARCHAR(32) NOT NULL,
+  type VARCHAR(50) NOT NULL,
+  description VARCHAR(1000) NOT NULL,
+  url VARCHAR(1000) NOT NULL,
+  CONSTRAINT UNI_NAME UNIQUE (name),
+  PRIMARY KEY(id)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE level_fee_rates (
+  id BIGINT AUTO_INCREMENT NOT NULL,
+  level INTEGER NOT NULL,
+  startTime BIGINT NOT NULL,
+  makerFeeRate DECIMAL(36,18) NOT NULL,
+  takerFeeRate DECIMAL(36,18) NOT NULL,
+  CONSTRAINT UNI_LEVEL_ST UNIQUE (level, startTime),
+  PRIMARY KEY(id)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE spots_symbols (
+  id BIGINT NOT NULL,
+  alwaysChargeQuote BOOL NOT NULL,
+  displayOrder INTEGER NOT NULL,
+  baseId BIGINT NOT NULL,
+  endTime BIGINT NOT NULL,
+  quoteId BIGINT NOT NULL,
+  startTime BIGINT NOT NULL,
+  baseMaximumQuantity DECIMAL(36,18) NOT NULL,
+  baseMinimumIncrement DECIMAL(36,18) NOT NULL,
+  baseMinimumQuantity DECIMAL(36,18) NOT NULL,
+  quoteMinimumIncrement DECIMAL(36,18) NOT NULL,
+  name VARCHAR(32) NOT NULL,
+  CONSTRAINT UNI_BASE_QUOTE UNIQUE (baseId, quoteId),
+  CONSTRAINT UNI_NAME UNIQUE (name),
+  PRIMARY KEY(id)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE symbol_fee_rates (
+  id BIGINT AUTO_INCREMENT NOT NULL,
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  makerFeeRate DECIMAL(36,18) NOT NULL,
+  takerFeeRate DECIMAL(36,18) NOT NULL,
+  CONSTRAINT UNI_SYMBOL_ST UNIQUE (symbolId, startTime),
+  PRIMARY KEY(id)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE user_fee_rates (
+  id BIGINT AUTO_INCREMENT NOT NULL,
+  startTime BIGINT NOT NULL,
+  userId BIGINT NOT NULL,
+  makerFeeRate DECIMAL(36,18) NOT NULL,
+  takerFeeRate DECIMAL(36,18) NOT NULL,
+  CONSTRAINT UNI_USER_ST UNIQUE (userId, startTime),
+  PRIMARY KEY(id)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE users (
+  id BIGINT AUTO_INCREMENT NOT NULL,
+  internal BOOL NOT NULL,
+  level INTEGER NOT NULL,
+  createdAt BIGINT NOT NULL,
+  updatedAt BIGINT NOT NULL,
+  version BIGINT NOT NULL,
+  address VARCHAR(50) NOT NULL,
+  type VARCHAR(50) NOT NULL,
+  CONSTRAINT UNI_ADDR UNIQUE (address),
+  PRIMARY KEY(id)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- END generate DDL --

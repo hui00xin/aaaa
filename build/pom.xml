@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.highdax.crypto</groupId>
+	<artifactId>build</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+	<name>Crypto Exchange Build</name>
+
+	<modules>
+		<!-- parent -->
+		<module>../parent</module>
+
+		<!-- internal modules -->
+		<module>../abstract-sequence</module>
+		<module>../abstract-engine</module>
+		<module>../blockchain</module>
+		<module>../client</module>
+		<module>../common</module>
+		<module>../db</module>
+		<module>../model</module>
+		<module>../trading</module>
+
+		<!-- deployable jars -->
+		<module>../config</module>
+		<module>../push</module>
+		<module>../quotation</module>
+		<module>../shared-api</module>
+
+		<module>../spots-api</module>
+		<module>../spots-engine</module>
+		<module>../spots-sequence</module>
+		<module>../spots-store</module>
+
+<!--		<module>../contracts-api</module>-->
+<!--		<module>../contracts-engine</module>-->
+		<module>../contracts-sequence</module>
+<!--		<module>../contracts-store</module>-->
+
+		<module>../wallet-api</module>
+	</modules>
+</project>

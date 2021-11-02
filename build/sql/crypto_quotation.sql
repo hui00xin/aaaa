@@ -1,0 +1,1450 @@
+
+
+-- BEGIN generate DDL --
+
+DROP DATABASE IF EXISTS crypto_quotation;
+
+CREATE DATABASE crypto_quotation;
+
+CREATE USER IF NOT EXISTS crypto_rw@'%' IDENTIFIED BY 'crypto_rw_password';
+
+CREATE USER IF NOT EXISTS crypto_ro@'%' IDENTIFIED BY 'crypto_ro_password';
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON crypto_quotation.* TO crypto_rw@'%' WITH GRANT OPTION;
+
+GRANT SELECT ON crypto_quotation.* TO crypto_ro@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+
+USE crypto_quotation;
+
+CREATE TABLE bars_1d (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE bars_1h (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE bars_1m (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE bars_1s (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE day_bars (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE hour_bars (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE min_bars (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE sec_bars (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+
+CREATE TABLE ticks (
+  makerOrderId BIGINT NOT NULL,
+  takerOrderId BIGINT NOT NULL,
+  takerDirection BOOL NOT NULL,
+  sequenceId BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  timestamp BIGINT NOT NULL,
+  price DECIMAL(36,18) NOT NULL,
+  volume DECIMAL(36,18) NOT NULL,
+  INDEX IDX_TS_SYMBOLID (timestamp,symbolId),
+  PRIMARY KEY(makerOrderId, takerOrderId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1d_202103 --
+CREATE TABLE bars_1d_202103 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1d_202104 --
+CREATE TABLE bars_1d_202104 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1d_202105 --
+CREATE TABLE bars_1d_202105 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1d_202106 --
+CREATE TABLE bars_1d_202106 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1d_202107 --
+CREATE TABLE bars_1d_202107 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1d_202108 --
+CREATE TABLE bars_1d_202108 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1d_202109 --
+CREATE TABLE bars_1d_202109 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1d_202110 --
+CREATE TABLE bars_1d_202110 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1d_202111 --
+CREATE TABLE bars_1d_202111 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1d_202112 --
+CREATE TABLE bars_1d_202112 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1d_202201 --
+CREATE TABLE bars_1d_202201 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1d_202202 --
+CREATE TABLE bars_1d_202202 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1h_202103 --
+CREATE TABLE bars_1h_202103 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1h_202104 --
+CREATE TABLE bars_1h_202104 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1h_202105 --
+CREATE TABLE bars_1h_202105 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1h_202106 --
+CREATE TABLE bars_1h_202106 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1h_202107 --
+CREATE TABLE bars_1h_202107 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1h_202108 --
+CREATE TABLE bars_1h_202108 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1h_202109 --
+CREATE TABLE bars_1h_202109 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1h_202110 --
+CREATE TABLE bars_1h_202110 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1h_202111 --
+CREATE TABLE bars_1h_202111 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1h_202112 --
+CREATE TABLE bars_1h_202112 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1h_202201 --
+CREATE TABLE bars_1h_202201 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1h_202202 --
+CREATE TABLE bars_1h_202202 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1m_202103 --
+CREATE TABLE bars_1m_202103 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1m_202104 --
+CREATE TABLE bars_1m_202104 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1m_202105 --
+CREATE TABLE bars_1m_202105 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1m_202106 --
+CREATE TABLE bars_1m_202106 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1m_202107 --
+CREATE TABLE bars_1m_202107 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1m_202108 --
+CREATE TABLE bars_1m_202108 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1m_202109 --
+CREATE TABLE bars_1m_202109 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1m_202110 --
+CREATE TABLE bars_1m_202110 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1m_202111 --
+CREATE TABLE bars_1m_202111 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1m_202112 --
+CREATE TABLE bars_1m_202112 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1m_202201 --
+CREATE TABLE bars_1m_202201 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1m_202202 --
+CREATE TABLE bars_1m_202202 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1s_202103 --
+CREATE TABLE bars_1s_202103 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1s_202104 --
+CREATE TABLE bars_1s_202104 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1s_202105 --
+CREATE TABLE bars_1s_202105 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1s_202106 --
+CREATE TABLE bars_1s_202106 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1s_202107 --
+CREATE TABLE bars_1s_202107 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1s_202108 --
+CREATE TABLE bars_1s_202108 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1s_202109 --
+CREATE TABLE bars_1s_202109 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1s_202110 --
+CREATE TABLE bars_1s_202110 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1s_202111 --
+CREATE TABLE bars_1s_202111 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1s_202112 --
+CREATE TABLE bars_1s_202112 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1s_202201 --
+CREATE TABLE bars_1s_202201 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- bars_1s_202202 --
+CREATE TABLE bars_1s_202202 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- day_bars_202103 --
+CREATE TABLE day_bars_202103 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- day_bars_202104 --
+CREATE TABLE day_bars_202104 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- day_bars_202105 --
+CREATE TABLE day_bars_202105 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- day_bars_202106 --
+CREATE TABLE day_bars_202106 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- day_bars_202107 --
+CREATE TABLE day_bars_202107 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- day_bars_202108 --
+CREATE TABLE day_bars_202108 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- day_bars_202109 --
+CREATE TABLE day_bars_202109 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- day_bars_202110 --
+CREATE TABLE day_bars_202110 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- day_bars_202111 --
+CREATE TABLE day_bars_202111 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- day_bars_202112 --
+CREATE TABLE day_bars_202112 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- day_bars_202201 --
+CREATE TABLE day_bars_202201 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- day_bars_202202 --
+CREATE TABLE day_bars_202202 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- hour_bars_202103 --
+CREATE TABLE hour_bars_202103 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- hour_bars_202104 --
+CREATE TABLE hour_bars_202104 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- hour_bars_202105 --
+CREATE TABLE hour_bars_202105 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- hour_bars_202106 --
+CREATE TABLE hour_bars_202106 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- hour_bars_202107 --
+CREATE TABLE hour_bars_202107 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- hour_bars_202108 --
+CREATE TABLE hour_bars_202108 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- hour_bars_202109 --
+CREATE TABLE hour_bars_202109 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- hour_bars_202110 --
+CREATE TABLE hour_bars_202110 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- hour_bars_202111 --
+CREATE TABLE hour_bars_202111 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- hour_bars_202112 --
+CREATE TABLE hour_bars_202112 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- hour_bars_202201 --
+CREATE TABLE hour_bars_202201 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- hour_bars_202202 --
+CREATE TABLE hour_bars_202202 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- min_bars_202103 --
+CREATE TABLE min_bars_202103 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- min_bars_202104 --
+CREATE TABLE min_bars_202104 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- min_bars_202105 --
+CREATE TABLE min_bars_202105 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- min_bars_202106 --
+CREATE TABLE min_bars_202106 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- min_bars_202107 --
+CREATE TABLE min_bars_202107 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- min_bars_202108 --
+CREATE TABLE min_bars_202108 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- min_bars_202109 --
+CREATE TABLE min_bars_202109 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- min_bars_202110 --
+CREATE TABLE min_bars_202110 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- min_bars_202111 --
+CREATE TABLE min_bars_202111 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- min_bars_202112 --
+CREATE TABLE min_bars_202112 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- min_bars_202201 --
+CREATE TABLE min_bars_202201 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- min_bars_202202 --
+CREATE TABLE min_bars_202202 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- sec_bars_202103 --
+CREATE TABLE sec_bars_202103 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- sec_bars_202104 --
+CREATE TABLE sec_bars_202104 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- sec_bars_202105 --
+CREATE TABLE sec_bars_202105 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- sec_bars_202106 --
+CREATE TABLE sec_bars_202106 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- sec_bars_202107 --
+CREATE TABLE sec_bars_202107 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- sec_bars_202108 --
+CREATE TABLE sec_bars_202108 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- sec_bars_202109 --
+CREATE TABLE sec_bars_202109 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- sec_bars_202110 --
+CREATE TABLE sec_bars_202110 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- sec_bars_202111 --
+CREATE TABLE sec_bars_202111 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- sec_bars_202112 --
+CREATE TABLE sec_bars_202112 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- sec_bars_202201 --
+CREATE TABLE sec_bars_202201 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- sec_bars_202202 --
+CREATE TABLE sec_bars_202202 (
+  startTime BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  closePrice DECIMAL(10,0) NOT NULL,
+  highPrice DECIMAL(10,0) NOT NULL,
+  lowPrice DECIMAL(10,0) NOT NULL,
+  openPrice DECIMAL(10,0) NOT NULL,
+  volume DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY(startTime, symbolId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- ticks_202103 --
+CREATE TABLE ticks_202103 (
+  makerOrderId BIGINT NOT NULL,
+  takerOrderId BIGINT NOT NULL,
+  takerDirection BOOL NOT NULL,
+  sequenceId BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  timestamp BIGINT NOT NULL,
+  price DECIMAL(36,18) NOT NULL,
+  volume DECIMAL(36,18) NOT NULL,
+  INDEX IDX_TS_SYMBOLID (timestamp,symbolId),
+  PRIMARY KEY(makerOrderId, takerOrderId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- ticks_202104 --
+CREATE TABLE ticks_202104 (
+  makerOrderId BIGINT NOT NULL,
+  takerOrderId BIGINT NOT NULL,
+  takerDirection BOOL NOT NULL,
+  sequenceId BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  timestamp BIGINT NOT NULL,
+  price DECIMAL(36,18) NOT NULL,
+  volume DECIMAL(36,18) NOT NULL,
+  INDEX IDX_TS_SYMBOLID (timestamp,symbolId),
+  PRIMARY KEY(makerOrderId, takerOrderId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- ticks_202105 --
+CREATE TABLE ticks_202105 (
+  makerOrderId BIGINT NOT NULL,
+  takerOrderId BIGINT NOT NULL,
+  takerDirection BOOL NOT NULL,
+  sequenceId BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  timestamp BIGINT NOT NULL,
+  price DECIMAL(36,18) NOT NULL,
+  volume DECIMAL(36,18) NOT NULL,
+  INDEX IDX_TS_SYMBOLID (timestamp,symbolId),
+  PRIMARY KEY(makerOrderId, takerOrderId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- ticks_202106 --
+CREATE TABLE ticks_202106 (
+  makerOrderId BIGINT NOT NULL,
+  takerOrderId BIGINT NOT NULL,
+  takerDirection BOOL NOT NULL,
+  sequenceId BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  timestamp BIGINT NOT NULL,
+  price DECIMAL(36,18) NOT NULL,
+  volume DECIMAL(36,18) NOT NULL,
+  INDEX IDX_TS_SYMBOLID (timestamp,symbolId),
+  PRIMARY KEY(makerOrderId, takerOrderId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- ticks_202107 --
+CREATE TABLE ticks_202107 (
+  makerOrderId BIGINT NOT NULL,
+  takerOrderId BIGINT NOT NULL,
+  takerDirection BOOL NOT NULL,
+  sequenceId BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  timestamp BIGINT NOT NULL,
+  price DECIMAL(36,18) NOT NULL,
+  volume DECIMAL(36,18) NOT NULL,
+  INDEX IDX_TS_SYMBOLID (timestamp,symbolId),
+  PRIMARY KEY(makerOrderId, takerOrderId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- ticks_202108 --
+CREATE TABLE ticks_202108 (
+  makerOrderId BIGINT NOT NULL,
+  takerOrderId BIGINT NOT NULL,
+  takerDirection BOOL NOT NULL,
+  sequenceId BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  timestamp BIGINT NOT NULL,
+  price DECIMAL(36,18) NOT NULL,
+  volume DECIMAL(36,18) NOT NULL,
+  INDEX IDX_TS_SYMBOLID (timestamp,symbolId),
+  PRIMARY KEY(makerOrderId, takerOrderId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- ticks_202109 --
+CREATE TABLE ticks_202109 (
+  makerOrderId BIGINT NOT NULL,
+  takerOrderId BIGINT NOT NULL,
+  takerDirection BOOL NOT NULL,
+  sequenceId BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  timestamp BIGINT NOT NULL,
+  price DECIMAL(36,18) NOT NULL,
+  volume DECIMAL(36,18) NOT NULL,
+  INDEX IDX_TS_SYMBOLID (timestamp,symbolId),
+  PRIMARY KEY(makerOrderId, takerOrderId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- ticks_202110 --
+CREATE TABLE ticks_202110 (
+  makerOrderId BIGINT NOT NULL,
+  takerOrderId BIGINT NOT NULL,
+  takerDirection BOOL NOT NULL,
+  sequenceId BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  timestamp BIGINT NOT NULL,
+  price DECIMAL(36,18) NOT NULL,
+  volume DECIMAL(36,18) NOT NULL,
+  INDEX IDX_TS_SYMBOLID (timestamp,symbolId),
+  PRIMARY KEY(makerOrderId, takerOrderId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- ticks_202111 --
+CREATE TABLE ticks_202111 (
+  makerOrderId BIGINT NOT NULL,
+  takerOrderId BIGINT NOT NULL,
+  takerDirection BOOL NOT NULL,
+  sequenceId BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  timestamp BIGINT NOT NULL,
+  price DECIMAL(36,18) NOT NULL,
+  volume DECIMAL(36,18) NOT NULL,
+  INDEX IDX_TS_SYMBOLID (timestamp,symbolId),
+  PRIMARY KEY(makerOrderId, takerOrderId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- ticks_202112 --
+CREATE TABLE ticks_202112 (
+  makerOrderId BIGINT NOT NULL,
+  takerOrderId BIGINT NOT NULL,
+  takerDirection BOOL NOT NULL,
+  sequenceId BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  timestamp BIGINT NOT NULL,
+  price DECIMAL(36,18) NOT NULL,
+  volume DECIMAL(36,18) NOT NULL,
+  INDEX IDX_TS_SYMBOLID (timestamp,symbolId),
+  PRIMARY KEY(makerOrderId, takerOrderId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- ticks_202201 --
+CREATE TABLE ticks_202201 (
+  makerOrderId BIGINT NOT NULL,
+  takerOrderId BIGINT NOT NULL,
+  takerDirection BOOL NOT NULL,
+  sequenceId BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  timestamp BIGINT NOT NULL,
+  price DECIMAL(36,18) NOT NULL,
+  volume DECIMAL(36,18) NOT NULL,
+  INDEX IDX_TS_SYMBOLID (timestamp,symbolId),
+  PRIMARY KEY(makerOrderId, takerOrderId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- ticks_202202 --
+CREATE TABLE ticks_202202 (
+  makerOrderId BIGINT NOT NULL,
+  takerOrderId BIGINT NOT NULL,
+  takerDirection BOOL NOT NULL,
+  sequenceId BIGINT NOT NULL,
+  symbolId BIGINT NOT NULL,
+  timestamp BIGINT NOT NULL,
+  price DECIMAL(36,18) NOT NULL,
+  volume DECIMAL(36,18) NOT NULL,
+  INDEX IDX_TS_SYMBOLID (timestamp,symbolId),
+  PRIMARY KEY(makerOrderId, takerOrderId)
+) Engine=INNODB AUTO_INCREMENT=10000 DEFAULT CHARSET=UTF8;
+
+-- END generate DDL --
